@@ -1,0 +1,22 @@
+
+Azerty123
+
+|=======+=================================+=============+==============================================+
+|    	|		Route		  |	Methode	|	      Champs de Formulaire	       |
+|=======+=================================+=============+==============================================+
+|   1   |   http://bled.ci/api/register	  |	POST	| name, email, password, password_confirmation,|
+|	|			  |		        |numero, matricule, statu,		       |
+|-------+---------------------------------+-------------+----------------------------------------------+
+|   2   |   http://bled.ci/api/login	  |	POST	|		email, password		       |
+|-------+---------------------------------+-------------+----------------------------------------------+
+|   3   |   http://bled.ci/api/logout	  |	POST	|			None		       |
+|-------+---------------------------------+-------------+----------------------------------------------+
+|   4   |   http://bled.ci/api/profil	  |	GET	|			None		       |
+|-------+---------------------------------+-------------+----------------------------------------------+
+|   5   |   http://bled.ci/api/proprietes |	GET	|			None		       |
+|-----------------------------------------+-------------+----------------------------------------------+
+
+NB : 
+La route "register" et "login" retournent des "token" de type "bearer" qu'il faut mettre dans l'entête de le champ 
+"bearer token" pour pouvoir accéder aux 3 dernières routes.
+Tombe dans mon inbox si t'as rien compris.
