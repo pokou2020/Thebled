@@ -12,7 +12,6 @@ class Acceuil extends StatefulWidget {
 class _AcceuilState extends State<Acceuil> {
   @override
   Widget build(BuildContext context) {
-    var user = Provider.of<UtilisateurProvider>(context).user;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.green[200],

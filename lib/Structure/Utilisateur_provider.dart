@@ -1,12 +1,11 @@
 // ignore_for_file: empty_catches
 import 'package:flutter/material.dart';
-import 'Utilisateur_model.dart';
 import 'Utilisateur_service.dart';
 
 class UtilisateurProvider with ChangeNotifier {
-  late User _user;
+  dynamic _user;
   bool _isAth = true;
-  User get user => _user;
+  dynamic get user => _user;
   bool get isAuth => _isAth;
 
   Future<void> resgisterUser(
@@ -17,8 +16,9 @@ class UtilisateurProvider with ChangeNotifier {
       required String statu,
       required String matricule}) async {
     try {
-      _user = (await UserServices.register(
-          name, email, password, numero, statu, matricule))!;
+      _user = await UserServices.register(
+          name, email, password, numero, statu, matricule);
+
       notifyListeners();
     } catch (e) {
       print(e);
@@ -27,8 +27,7 @@ class UtilisateurProvider with ChangeNotifier {
 
   Future<void> loginUser({email, password}) async {
     try {
-      _user = (await UserServices.login(email, password))!;
-
+      _user = await UserServices.login(email, password);
       notifyListeners();
     } catch (e) {
       print(e);

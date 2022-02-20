@@ -15,23 +15,27 @@ class RegisterResponse {
     this.user,
     this.token,
     this.tokenType,
+    this.message,
   });
 
   final User? user;
   final String? token;
   final String? tokenType;
+  final String? message;
 
   factory RegisterResponse.fromJson(Map<String, dynamic> json) =>
       RegisterResponse(
         user: User.fromJson(json["user"]),
         token: json["token"],
         tokenType: json["token_type"],
+        message: json["message"],
       );
 
   Map<String, dynamic> toJson() => {
         "user": user!.toJson(),
         "token": token,
         "token_type": tokenType,
+        "message": message,
       };
 }
 

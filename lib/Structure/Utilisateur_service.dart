@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:thebled/Structure/Utilisateur_model.dart';
 
 class UserServices {
-  static Future<User?> register(
+  static Future register(
     String name,
     String email,
     String password,
@@ -30,16 +30,14 @@ class UserServices {
     if (response.statusCode == 200) {
       var _json = response.body.toString();
       var _jsonDecode = json.decode(_json);
-      debugPrint(_json);
-      var resp = RegisterResponse.fromJson(_jsonDecode);
-      var user = resp.user;
-      return user;
+      // debugPrint(_json);
+      return _jsonDecode;
     } else {
       throw Exception('Failed to load post ');
     }
   }
 
-  static Future<User?> login(
+  static Future login(
     String email,
     String password,
   ) async {
@@ -56,9 +54,7 @@ class UserServices {
       var _json = response.body.toString();
       var _jsonDecode = json.decode(_json);
       debugPrint(_json);
-      var resp = RegisterResponse.fromJson(_jsonDecode);
-      var user = resp.user;
-      return user;
+      return _jsonDecode;
     } else {
       throw Exception('Failed to load post ');
     }

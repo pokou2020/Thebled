@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+import 'package:thebled/Screen/errordialog_widget.dart';
 import 'package:thebled/Structure/Utilisateur_provider.dart';
 
 import 'Acceuil.dart';
@@ -28,15 +29,27 @@ class _ConnexionState extends State<Connexion> {
 
   Future<void> _saveLogin() async {
     bool vld = _formKey.currentState!.validate();
+    var prov = Provider.of<UtilisateurProvider>(context, listen: false);
     if (vld) {
       setState(() {
         _loader = true;
       });
-      await Provider.of<UtilisateurProvider>(context, listen: false).loginUser(
+      await prov.loginUser(
         email: email,
         password: password,
       );
-      Navigator.of(context).pushReplacementNamed("accueil");
+      if (prov.user["message"] != null) {
+        showErrorDialog(context,
+            label: "ERREUR", msg: "Adresse Email ou mot de passe incorrect");
+        setState(() {
+          _loader = false;
+        });
+      } else {
+        Navigator.of(context).pushReplacementNamed("accueil");
+        setState(() {
+          _loader = false;
+        });
+      }
     } else {
       _loader = false;
     }
