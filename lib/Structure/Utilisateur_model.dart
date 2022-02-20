@@ -1,45 +1,80 @@
 // To parse this JSON data, do
 //
-//     final utilisateur = utilisateurFromMap(jsonString);
+//     final registerResponse = registerResponseFromJson(jsonString);
 
 import 'dart:convert';
 
-class Utilisateur {
-    Utilisateur({
-        required this.name,
-        required this.email,
-        required this.password,
-        required this.numero,
-        required this.statu,
-        required this.matricule,
-    });
+RegisterResponse registerResponseFromJson(String str) =>
+    RegisterResponse.fromJson(json.decode(str));
 
-    List<String> name;
-    List<String> email;
-    List<String> password;
-    List<String> numero;
-    List<String> statu;
-    List<String> matricule;
+String registerResponseToJson(RegisterResponse data) =>
+    json.encode(data.toJson());
 
-    factory Utilisateur.fromJson(String str) => Utilisateur.fromMap(json.decode(str));
+class RegisterResponse {
+  RegisterResponse({
+    this.user,
+    this.token,
+    this.tokenType,
+  });
 
-    String toJson() => json.encode(toMap());
+  final User? user;
+  final String? token;
+  final String? tokenType;
 
-    factory Utilisateur.fromMap(Map<String, dynamic> json) => Utilisateur(
-        name: List<String>.from(json["name"].map((x) => x)),
-        email: List<String>.from(json["email"].map((x) => x)),
-        password: List<String>.from(json["password"].map((x) => x)),
-        numero: List<String>.from(json["numero"].map((x) => x)),
-        statu: List<String>.from(json["statu"].map((x) => x)),
-        matricule: List<String>.from(json["matricule"].map((x) => x)),
-    );
+  factory RegisterResponse.fromJson(Map<String, dynamic> json) =>
+      RegisterResponse(
+        user: User.fromJson(json["user"]),
+        token: json["token"],
+        tokenType: json["token_type"],
+      );
 
-    Map<String, dynamic> toMap() => {
-        "name": List<dynamic>.from(name.map((x) => x)),
-        "email": List<dynamic>.from(email.map((x) => x)),
-        "password": List<dynamic>.from(password.map((x) => x)),
-        "numero": List<dynamic>.from(numero.map((x) => x)),
-        "statu": List<dynamic>.from(statu.map((x) => x)),
-        "matricule": List<dynamic>.from(matricule.map((x) => x)),
-    };
+  Map<String, dynamic> toJson() => {
+        "user": user!.toJson(),
+        "token": token,
+        "token_type": tokenType,
+      };
+}
+
+class User {
+  User({
+    this.name,
+    this.email,
+    this.numero,
+    this.idmclu,
+    this.statu,
+    this.updatedAt,
+    this.createdAt,
+    this.id,
+  });
+
+  final String? name;
+  final String? email;
+  final String? numero;
+  final String? idmclu;
+  final String? statu;
+  final DateTime? updatedAt;
+  final DateTime? createdAt;
+  final int? id;
+
+  factory User.fromJson(Map<String, dynamic> json) => User(
+        name: json["name"],
+        email: json["email"],
+        numero: json["numero"],
+        idmclu: json["idmclu"],
+        statu: json["statu"],
+        updatedAt: DateTime.parse(json["updated_at"]),
+        createdAt: DateTime.parse(json["created_at"]),
+        id: json["id"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "email": email,
+        "numero": numero,
+        "idmclu": idmclu,
+        "statu": statu,
+        "updated_at": updatedAt!.toIso8601String(),
+        "created_at": createdAt!.toIso8601String(),
+        "id": id,
+      };
 }

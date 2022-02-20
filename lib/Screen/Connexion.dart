@@ -5,14 +5,14 @@ import 'package:provider/provider.dart';
 import 'package:thebled/Structure/Utilisateur_provider.dart';
 
 import 'Acceuil.dart';
-  const spinkit = SpinKitThreeBounce(
+
+const spinkit = SpinKitThreeBounce(
   color: Colors.green,
   size: 20.0,
 );
 
 class Connexion extends StatefulWidget {
   const Connexion({Key? key}) : super(key: key);
-
 
   @override
   _ConnexionState createState() => _ConnexionState();
@@ -27,25 +27,19 @@ class _ConnexionState extends State<Connexion> {
   bool _checkValue = false;
 
   Future<void> _saveLogin() async {
-   
-      bool vld = _formKey.currentState!.validate();
-      if (vld) {
-        setState(() {
-          _loader = true;
-        });
-        await Provider.of<UtilisateurProvider>(context, listen: false)
-            .loginUser(
-          email: email,
-          password: password,
-        );
-        // print(User.fromMap(_username,));
-        Navigator.of(context).pushReplacementNamed(Acceuil.routeName);
-      }
-      else {   
-        _loader = false;
-      }
-
-    
+    bool vld = _formKey.currentState!.validate();
+    if (vld) {
+      setState(() {
+        _loader = true;
+      });
+      await Provider.of<UtilisateurProvider>(context, listen: false).loginUser(
+        email: email,
+        password: password,
+      );
+      Navigator.of(context).pushReplacementNamed("accueil");
+    } else {
+      _loader = false;
+    }
   }
 
   //   void showToast(String msg, {int duration, int gravity}) {
@@ -55,8 +49,8 @@ class _ConnexionState extends State<Connexion> {
 
   @override
   Widget build(BuildContext context) {
-     var size = MediaQuery.of(context).size;
-       var padding = EdgeInsets.symmetric(
+    var size = MediaQuery.of(context).size;
+    var padding = EdgeInsets.symmetric(
       vertical: size.longestSide * 0.02,
       horizontal: 16.0,
     );
@@ -124,7 +118,7 @@ class _ConnexionState extends State<Connexion> {
                     validator: (val) =>
                         val!.isEmpty ? "Champ Email vide" : null,
                     onChanged: (val) => email = val,
-                     onFieldSubmitted: (val) => _saveLogin(),
+                    onFieldSubmitted: (val) => _saveLogin(),
                     style: const TextStyle(
                       color: Colors.black87,
                     ),
@@ -158,16 +152,17 @@ class _ConnexionState extends State<Connexion> {
                     style: const TextStyle(
                       color: Colors.black87,
                     ),
-                    decoration:  InputDecoration(
+                    decoration: InputDecoration(
                         border: InputBorder.none,
                         prefixIcon: IconButton(
-                          icon: _showPassword?Icon(Icons.visibility_outlined):Icon(Icons.visibility_off),
-                          onPressed: (){
+                            icon: _showPassword
+                                ? Icon(Icons.visibility_outlined)
+                                : Icon(Icons.visibility_off),
+                            onPressed: () {
                               setState(() {
-                                           _showPassword = !_showPassword;
-                                         });
-                          }
-                        ),                        
+                                _showPassword = !_showPassword;
+                              });
+                            }),
                         hintText: 'Password')),
               ),
               Row(
@@ -182,9 +177,7 @@ class _ConnexionState extends State<Connexion> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
-                            )
-                            )
-                            ),
+                            ))),
                   )
                 ],
               ),
@@ -197,14 +190,14 @@ class _ConnexionState extends State<Connexion> {
                       borderRadius: BorderRadius.circular(30),
                       color: Colors.white),
                   child: Center(
-                    child:  !_loader ? Text(
-                                          "Se Connecter",
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                          
-                                          ),
-                                        )
-                                      : spinkit,               
+                    child: !_loader
+                        ? Text(
+                            "Se Connecter",
+                            style: TextStyle(
+                              fontSize: 15,
+                            ),
+                          )
+                        : spinkit,
                   ),
                 ),
               ),

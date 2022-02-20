@@ -1,52 +1,10 @@
-// import 'dart:convert';
-// import 'dart:io';
-// import 'package:flutter/material.dart';
-// import 'package:dio/dio.dart';
-// import 'Utilisateur_model.dart';
-
-// class UserServices {
-
-//   static Future<Utilisateur> register(
-//       String name, email, password, numero, statu, matricule,  ) async {
-//     Dio dio = Dio();
-//     try {
-//       Utilisateur users;
-//       FormData formData = FormData.fromMap({
-//         "name": name,
-//         "email": email,
-//         "password": password,
-//         "repassword": password,
-//         "numero": numero,
-//         "statu": statu,
-//         "matricule": matricule
-//       });
-//       Response response = await dio.post(
-//         "http://bled.ci/api/register",
-//         data: formData,
-//       );
-//       if (response.statusCode == 200) {
-//         Map<String, dynamic> bodyResponce = response.data;
-//         if (bodyResponce["success"]) {
-//           users = Utilisateur.fromMap(bodyResponce["users"]);
-
-//           print("news user save ${users.toMap()}");
-//           return users;
-//         } else {
-//           throw (bodyResponce["message"]);
-//         }
-//       }
-//     } catch (e) {
-//       rethrow;
-//     }
-//  }
-//   }
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'Utilisateur_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:thebled/Structure/Utilisateur_model.dart';
 
 class UserServices {
-  static Future<Utilisateur> register(
+  static Future<User?> register(
     String name,
     String email,
     String password,
@@ -68,21 +26,20 @@ class UserServices {
         "matricule": matricule
       },
     );
+    print(response.statusCode);
     if (response.statusCode == 200) {
-      
       var _json = response.body.toString();
-      debugPrint(_json);
-
       var _jsonDecode = json.decode(_json);
-      var user = Utilisateur.fromMap(_jsonDecode);
+      debugPrint(_json);
+      var resp = RegisterResponse.fromJson(_jsonDecode);
+      var user = resp.user;
       return user;
-     
     } else {
       throw Exception('Failed to load post ');
     }
   }
 
-    static Future<Utilisateur> login(
+  static Future<User?> login(
     String email,
     String password,
   ) async {
@@ -96,18 +53,14 @@ class UserServices {
       },
     );
     if (response.statusCode == 200) {
-      print(response.statusCode);
       var _json = response.body.toString();
-      debugPrint(_json);
-
       var _jsonDecode = json.decode(_json);
-      var user = Utilisateur.fromMap(_jsonDecode);
+      debugPrint(_json);
+      var resp = RegisterResponse.fromJson(_jsonDecode);
+      var user = resp.user;
       return user;
-     
     } else {
       throw Exception('Failed to load post ');
     }
   }
-
-
 }

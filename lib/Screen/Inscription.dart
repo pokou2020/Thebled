@@ -4,11 +4,11 @@ import 'package:provider/provider.dart';
 import 'package:thebled/Structure/Utilisateur_provider.dart';
 
 import 'Acceuil.dart';
-  const spinkit = SpinKitThreeBounce(
+
+const spinkit = SpinKitThreeBounce(
   color: Colors.green,
   size: 20.0,
 );
-
 
 class Inscription extends StatefulWidget {
   const Inscription({Key? key}) : super(key: key);
@@ -29,31 +29,24 @@ class _InscriptionState extends State<Inscription> {
   bool _loader = false;
 
   Future<void> _submitForm() async {
-  
-      bool vld = _formKey.currentState!.validate();
-      if (vld) {
-        setState(() {
-          _loader = true;
-        });
-             {
-             Provider.of<UtilisateurProvider>(context, listen: false)
-             .resgisterUser(
-              name: name,
-              email: email,
-              password: password,
-              numero: numero,
-              statu: statu,
-              matricule: matricule,
-               );
-              Navigator.of(context).pushReplacementNamed(Acceuil.routeName);
-                      } 
-        print(email);
-        print(password);
-        // print(User.fromMap(_username,));
-        //Navigator.of(context).pushReplacementNamed(Acceuil.routeName);
-      } 
-      else{
-     _loader = false;
+    bool vld = _formKey.currentState!.validate();
+    if (vld) {
+      setState(() {
+        _loader = true;
+      });
+      {
+        Provider.of<UtilisateurProvider>(context, listen: false).resgisterUser(
+          name: name,
+          email: email,
+          password: password,
+          numero: numero,
+          statu: statu,
+          matricule: matricule,
+        );
+        Navigator.of(context).pushReplacementNamed("acceuil");
+      }
+    } else {
+      _loader = false;
     }
   }
 
@@ -315,26 +308,26 @@ class _InscriptionState extends State<Inscription> {
                       )
                     ],
                   ),
-                          InkWell(
-                onTap: !_loader ? _submitForm : () {},
-                child: Container(
-                  height: 40,
-                  width: 250,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.white),
-                  child: Center(
-                    child:  !_loader ? Text(
-                                          "Se Connecter",
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                          
-                                          ),
-                                        )
-                                      : spinkit,               
+                  InkWell(
+                    onTap: !_loader ? _submitForm : () {},
+                    child: Container(
+                      height: 40,
+                      width: 250,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Colors.white),
+                      child: Center(
+                        child: !_loader
+                            ? Text(
+                                "Se Connecter",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                ),
+                              )
+                            : spinkit,
+                      ),
+                    ),
                   ),
-                ),
-              ),
                 ],
               ),
             ),
