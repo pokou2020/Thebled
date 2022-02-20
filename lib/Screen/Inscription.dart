@@ -44,6 +44,9 @@ class _InscriptionState extends State<Inscription> {
           matricule: matricule,
         );
         Navigator.of(context).pushReplacementNamed("acceuil");
+        setState(() {
+          _loader = false;
+        });
       }
     } else {
       _loader = false;
