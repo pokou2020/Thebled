@@ -29,7 +29,7 @@ class UtilisateurProvider with ChangeNotifier {
        name, email, password, numero, statu, matricule);
       notifyListeners();
     } catch (e) {
-       
+        throw e;
     }
   }
 
