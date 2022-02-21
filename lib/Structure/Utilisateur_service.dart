@@ -27,6 +27,7 @@ class UserServices {
       },
     );
     print(response.statusCode);
+    print(response.body);
     if (response.statusCode == 200) {
       var _json = response.body.toString();
       var _jsonDecode = json.decode(_json);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
+import 'package:thebled/Screen/errordialog_widget.dart';
 import 'package:thebled/Structure/Utilisateur_provider.dart';
 
 import 'Acceuil.dart';
@@ -27,15 +28,16 @@ class _InscriptionState extends State<Inscription> {
   String statu = "En tant que...";
   String matricule = "";
   bool _loader = false;
+    bool _checkValue = false;
 
   Future<void> _submitForm() async {
     bool vld = _formKey.currentState!.validate();
+    var prov=Provider.of<UtilisateurProvider>(context, listen: false);
     if (vld) {
       setState(() {
         _loader = true;
       });
-      {
-        Provider.of<UtilisateurProvider>(context, listen: false).resgisterUser(
+      await prov.resgisterUser(
           name: name,
           email: email,
           password: password,
@@ -43,12 +45,21 @@ class _InscriptionState extends State<Inscription> {
           statu: statu,
           matricule: matricule,
         );
-        Navigator.of(context).pushReplacementNamed("acceuil");
+         if (prov.user["user"] == null){
+                 showErrorDialog(context,
+            label: "ERREUR", msg: "Un utilisateur possede deja le mail ou le numero");
+        setState(() {
+          _loader = false;
+        });
+         }
+        else  {
+        Navigator.of(context).pushReplacementNamed("accueil");
         setState(() {
           _loader = false;
         });
       }
-    } else {
+      }
+    else {
       _loader = false;
     }
   }
@@ -170,7 +181,7 @@ class _InscriptionState extends State<Inscription> {
                         color: Colors.white),
                     child: TextFormField(
                         validator: (val) =>
-                            val!.length < 4 ? "Mot de pass trop court" : null,
+                            val!.length < 8? "Mot de pass trop court" : null,
                         onChanged: (val) => password = val,
                         obscureText: true,
                         style: const TextStyle(
@@ -302,7 +313,10 @@ class _InscriptionState extends State<Inscription> {
                         height: 40,
                         width: 250,
                         child: FlatButton(
-                            onPressed: () => print("J' ai deja un compte"),
+                            onPressed: (){
+                        
+                              Navigator.of(context).pushReplacementNamed("accueil");
+                            },
                             child: Text("J' ai deja un compte",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
