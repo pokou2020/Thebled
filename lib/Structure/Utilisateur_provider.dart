@@ -36,9 +36,15 @@ class UtilisateurProvider with ChangeNotifier {
     }
   }
 
-  Future<void> getProfil({name, email,}) async {
+  Future<void> getProfil({
+    name,
+    email,
+  }) async {
     try {
-      _userProfile = await UserServices.profilUser(name, email, );
+      _userProfile = await UserServices.profilUser(
+        name,
+        email,
+      );
       notifyListeners();
     } catch (e) {
       print(e);

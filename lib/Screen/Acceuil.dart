@@ -11,30 +11,21 @@ class Acceuil extends StatefulWidget {
 }
 
 class _AcceuilState extends State<Acceuil> {
-    var _isInit = true;
+  var _isInit = true;
   var _isLoading = false;
-   @override
-  void didChangeDependencies() {
-    if(_isInit) {
-      setState(() {
-        _isLoading = true;
-      });
-
-      Provider.of<UtilisateurProvider>(context).getProfil().then((_) {
-        setState(() {
-          _isLoading = false;
-        });
-      });
-
-      
-    }
-
-    _isInit = false;
-    super.didChangeDependencies();
+  UtilisateurProvider? utilisateurProvider;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    utilisateurProvider = context.read<UtilisateurProvider>();
+    utilisateurProvider!
+        .getProfil(email: "lesyde@outlook.fr", name: "yao sydney");
   }
+
   @override
   Widget build(BuildContext context) {
-  final   prov = Provider.of<UtilisateurProvider>(context, listen: false);
+    final prov = Provider.of<UtilisateurProvider>(context, listen: false);
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.green[200],
@@ -131,8 +122,9 @@ class _AcceuilState extends State<Acceuil> {
                         width: 25,
                       ),
                       InkWell(
-                          onTap: () {
-                          Navigator.of(context).pushReplacementNamed("propriete");
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushReplacementNamed("propriete");
                         },
                         child: Container(
                           child: Text(
@@ -213,7 +205,7 @@ class _AcceuilState extends State<Acceuil> {
             )),
         body: Container(
           height: MediaQuery.of(context).size.height,
-          child: Column(
+          child: ListView(
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
