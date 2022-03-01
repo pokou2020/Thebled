@@ -7,7 +7,9 @@ import 'Screen/Acceuil.dart';
 import 'Screen/Connexion.dart';
 import 'Screen/First.dart';
 import 'Screen/Inscription.dart';
+import 'Screen/propriete.dart';
 import 'Structure/Utilisateur_provider.dart';
+import 'Structure/propriete_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +22,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider.value(value: UtilisateurProvider())],
+      providers: [
+        ChangeNotifierProvider.value(value: UtilisateurProvider()),
+        ChangeNotifierProvider.value(value: ProprieteProvider()),
+        ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -40,6 +45,8 @@ class MyApp extends StatelessWidget {
           "Connexion": (context) => const Connexion(),
           "Inscription": (context) => const Inscription(),
           "accueil": (context) => Acceuil(),
+           "propriete": (context) => Propriete(),
+
         },
       ),
     );

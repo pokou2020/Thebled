@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:thebled/Structure/Utilisateur_model.dart';
 
 class UserServices {
+
+  // S'inscrire
   static Future register(
     String name,
     String email,
@@ -37,7 +39,7 @@ class UserServices {
       throw Exception('Failed to load post ');
     }
   }
-
+//Se connecter
   static Future login(
     String email,
     String password,
@@ -60,4 +62,31 @@ class UserServices {
       throw Exception('Failed to load post ');
     }
   }
+
+  //Afficher le profile de la personne conneter
+
+  
+  static Future profilUser(
+    String name,
+    String email,
+    ) async {
+    String url = 'http://bled.ci/api/profil';
+
+    try {
+      
+      final response = await http.get(Uri.parse(url));
+
+      if(response.statusCode == 200) {
+        var _json = response.body.toString();
+         var _jsonDecode = json.decode(_json);
+        return _jsonDecode;
+      }
+
+      print("============== Data fetched");
+
+    } catch (error) {
+      throw error;
+    }
+  }
+
 }

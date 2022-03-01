@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:thebled/Structure/Utilisateur_model.dart';
 import 'package:thebled/Structure/Utilisateur_provider.dart';
 
 class Acceuil extends StatefulWidget {
@@ -10,8 +11,30 @@ class Acceuil extends StatefulWidget {
 }
 
 class _AcceuilState extends State<Acceuil> {
+    var _isInit = true;
+  var _isLoading = false;
+   @override
+  void didChangeDependencies() {
+    if(_isInit) {
+      setState(() {
+        _isLoading = true;
+      });
+
+      Provider.of<UtilisateurProvider>(context).getProfil().then((_) {
+        setState(() {
+          _isLoading = false;
+        });
+      });
+
+      
+    }
+
+    _isInit = false;
+    super.didChangeDependencies();
+  }
   @override
   Widget build(BuildContext context) {
+  final   prov = Provider.of<UtilisateurProvider>(context, listen: false);
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.green[200],
@@ -41,7 +64,7 @@ class _AcceuilState extends State<Acceuil> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Container(
-                            child: Text('Pokou Nathanael Kouakou',
+                            child: Text('Pokou Naths',
                                 style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
@@ -107,12 +130,17 @@ class _AcceuilState extends State<Acceuil> {
                       SizedBox(
                         width: 25,
                       ),
-                      Container(
-                        child: Text(
-                          "Mes propriété",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                      InkWell(
+                          onTap: () {
+                          Navigator.of(context).pushReplacementNamed("propriete");
+                        },
+                        child: Container(
+                          child: Text(
+                            "Mes propriété",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
