@@ -65,14 +65,19 @@ class UserServices {
 
   //Afficher le profile de la personne conneter
 
-  static Future profilUser(
-    String name,
-    String email,
-  ) async {
+  static Future profilUser({
+    String? name,
+    String? email,
+    String? userToken,
+  }) async {
     String url = 'http://bled.ci/api/profil';
 
     try {
-      final response = await http.get(Uri.parse(url));
+      final response = await http.get(Uri.parse(url), headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $userToken',
+      });
       print(response.statusCode);
       if (response.statusCode == 200) {
         var _json = response.body.toString();

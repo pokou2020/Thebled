@@ -41,11 +41,15 @@ class UtilisateurProvider with ChangeNotifier {
     email,
   }) async {
     try {
-      _userProfile = await UserServices.profilUser(
-        name,
-        email,
-      );
-      notifyListeners();
+      if (user != null) {
+        print(user["token"].toString());
+        _userProfile = await UserServices.profilUser(
+          name: name,
+          email: email,
+          userToken: user["token"].toString(),
+        );
+        notifyListeners();
+      }
     } catch (e) {
       print(e);
     }
