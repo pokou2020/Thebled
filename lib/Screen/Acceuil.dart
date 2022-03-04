@@ -19,8 +19,9 @@ class _AcceuilState extends State<Acceuil> {
     // TODO: implement initState
     super.initState();
     utilisateurProvider = context.read<UtilisateurProvider>();
-    utilisateurProvider!
-        .getProfil(email: "lesyde@outlook.fr", name: "yao sydney");
+    utilisateurProvider!.getProfil(
+        email: utilisateurProvider!.user.user!.email,
+        name: utilisateurProvider!.user.user!.name);
   }
 
   @override
@@ -29,8 +30,8 @@ class _AcceuilState extends State<Acceuil> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.green[200],
-          title: const Text(
-            'Nos services',
+          title: Text(
+            "Acceuil",
             style: TextStyle(
                 color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
           ),
@@ -55,14 +56,14 @@ class _AcceuilState extends State<Acceuil> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Container(
-                            child: Text('Pokou Naths',
+                            child: Text(prov.user.user!.name!,
                                 style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white)),
                           ),
                           Container(
-                            child: Text('Lepnkouakou@gmail.com',
+                            child: Text(prov.user.user!.email!,
                                 style: TextStyle(
                                     fontSize: 11,
                                     fontWeight: FontWeight.bold,

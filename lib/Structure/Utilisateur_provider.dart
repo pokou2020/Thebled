@@ -1,11 +1,12 @@
 // ignore_for_file: empty_catches
 import 'package:flutter/material.dart';
+import 'package:thebled/Structure/Utilisateur_model.dart';
 import 'Utilisateur_service.dart';
 
 class UtilisateurProvider with ChangeNotifier {
-  dynamic _user;
+  late RegisterResponse _user;
   bool _isAth = true;
-  dynamic get user => _user;
+  RegisterResponse get user => _user;
   bool get isAuth => _isAth;
   dynamic _userProfile;
   dynamic get userProfile => _userProfile;
@@ -42,11 +43,11 @@ class UtilisateurProvider with ChangeNotifier {
   }) async {
     try {
       if (user != null) {
-        print(user["token"].toString());
+        // print(user["token"].toString());
         _userProfile = await UserServices.profilUser(
           name: name,
           email: email,
-          userToken: user["token"].toString(),
+          userToken: user.token,
         );
         notifyListeners();
       }

@@ -33,14 +33,14 @@ class UserServices {
       var _json = response.body.toString();
       var _jsonDecode = json.decode(_json);
       // debugPrint(_json);
-      return _jsonDecode;
+      return RegisterResponse.fromJson(_jsonDecode);
     } else {
       throw Exception('Failed to load post ');
     }
   }
 
 //Se connecter
-  static Future login(
+  static Future<RegisterResponse> login(
     String email,
     String password,
   ) async {
@@ -57,7 +57,11 @@ class UserServices {
       var _json = response.body.toString();
       var _jsonDecode = json.decode(_json);
       debugPrint(_json);
-      return _jsonDecode;
+      if (_jsonDecode["message"] != null) {
+        return RegisterResponse(message: _jsonDecode["message"]);
+      } else {
+        return RegisterResponse.fromJson(_jsonDecode);
+      }
     } else {
       throw Exception('Failed to load post ');
     }

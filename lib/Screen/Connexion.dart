@@ -38,9 +38,8 @@ class _ConnexionState extends State<Connexion> {
         email: email,
         password: password,
       );
-      if (prov.user["message"] != null) {
-        showErrorDialog(context,
-            label: "ERREUR", msg: "Adresse Email ou mot de passe incorrect");
+      if (prov.user.message != null) {
+        showErrorDialog(context, label: "ERREUR", msg: prov.user.message);
         setState(() {
           _loader = false;
         });
