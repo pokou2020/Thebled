@@ -16,26 +16,40 @@ class RegisterResponse {
     this.token,
     this.tokenType,
     this.message,
+    this.email,
+    this.numero,
   });
 
   final User? user;
   final String? token;
   final String? tokenType;
   final String? message;
+  final List<dynamic>? email;
+  final List<dynamic>? numero;
 
   factory RegisterResponse.fromJson(Map<String, dynamic> json) =>
       RegisterResponse(
-        user: User.fromJson(json["user"]),
-        token: json["token"],
-        tokenType: json["token_type"],
-        message: json["message"],
+        user: json["user"] == null ? null : User.fromJson(json["user"]),
+        token: json["token"] == null ? null : json["token"],
+        tokenType: json["token_type"] == null ? null : json["token_type"],
+        message: json["message"] == null ? null : json["message"],
+        email: json["email"] == null
+            ? null
+            : List<dynamic>.from(json["email"].map((x) => x)),
+        numero: json["numero"] == null
+            ? null
+            : List<dynamic>.from(json["numero"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
-        "user": user!.toJson(),
-        "token": token,
-        "token_type": tokenType,
-        "message": message,
+        "user": user == null ? null : user!.toJson(),
+        "token": token == null ? null : token,
+        "token_type": tokenType == null ? null : tokenType,
+        "message": message == null ? null : message,
+        "email":
+            email == null ? null : List<dynamic>.from(email!.map((x) => x)),
+        "numero":
+            numero == null ? null : List<dynamic>.from(numero!.map((x) => x)),
       };
 }
 
@@ -61,24 +75,28 @@ class User {
   final int? id;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-        name: json["name"],
-        email: json["email"],
-        numero: json["numero"],
-        idmclu: json["idmclu"],
-        statu: json["statu"],
-        updatedAt: DateTime.parse(json["updated_at"]),
-        createdAt: DateTime.parse(json["created_at"]),
-        id: json["id"],
+        name: json["name"] == null ? null : json["name"],
+        email: json["email"] == null ? null : json["email"],
+        numero: json["numero"] == null ? null : json["numero"],
+        idmclu: json["idmclu"] == null ? null : json["idmclu"],
+        statu: json["statu"] == null ? null : json["statu"],
+        updatedAt: json["updated_at"] == null
+            ? null
+            : DateTime.parse(json["updated_at"]),
+        createdAt: json["created_at"] == null
+            ? null
+            : DateTime.parse(json["created_at"]),
+        id: json["id"] == null ? null : json["id"],
       );
 
   Map<String, dynamic> toJson() => {
-        "name": name,
-        "email": email,
-        "numero": numero,
-        "idmclu": idmclu,
-        "statu": statu,
-        "updated_at": updatedAt!.toIso8601String(),
-        "created_at": createdAt!.toIso8601String(),
-        "id": id,
+        "name": name == null ? null : name,
+        "email": email == null ? null : email,
+        "numero": numero == null ? null : numero,
+        "idmclu": idmclu == null ? null : idmclu,
+        "statu": statu == null ? null : statu,
+        "updated_at": updatedAt == null ? null : updatedAt!.toIso8601String(),
+        "created_at": createdAt == null ? null : createdAt!.toIso8601String(),
+        "id": id == null ? null : id,
       };
 }

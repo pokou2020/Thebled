@@ -45,10 +45,10 @@ class _InscriptionState extends State<Inscription> {
         statu: statu,
         matricule: matricule,
       );
-      if (prov.user.message != null) {
+      if (prov.user.email != null || prov.user.numero != null) {
         showErrorDialog(context,
             label: "ERREUR",
-            msg: "Un utilisateur possede deja le mail ou le numero");
+            msg: "Un utilisateur possede deja cet Email ou ce numero");
         setState(() {
           _loader = false;
         });

@@ -33,7 +33,19 @@ class UserServices {
       var _json = response.body.toString();
       var _jsonDecode = json.decode(_json);
       // debugPrint(_json);
-      return RegisterResponse.fromJson(_jsonDecode);
+      if (response.statusCode == 200) {
+        var _json = response.body.toString();
+        var _jsonDecode = json.decode(_json);
+        debugPrint(_json);
+        if (_jsonDecode["email"] != null) {
+          return RegisterResponse(email: _jsonDecode["email"]);
+        }
+        if (_jsonDecode["numero"] != null) {
+          return RegisterResponse(numero: _jsonDecode["numero"]);
+        } else {
+          return RegisterResponse.fromJson(_jsonDecode);
+        }
+      }
     } else {
       throw Exception('Failed to load post ');
     }
