@@ -107,4 +107,26 @@ class UserServices {
       throw error;
     }
   }
+
+  static Future getPropriete({String? userToken}) async {
+    String url = 'http://bled.ci/api/proprietes';
+
+    try {
+      final response = await http.get(Uri.parse(url), headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $userToken',
+      });
+      print(response.statusCode);
+
+      if (response.statusCode == 200) {
+        var _json = response.body.toString();
+        var _jsonDecode = json.decode(_json);
+        print("propriete :$_jsonDecode");
+        return _jsonDecode;
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
 }

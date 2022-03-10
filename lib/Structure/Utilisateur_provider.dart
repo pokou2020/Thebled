@@ -10,6 +10,9 @@ class UtilisateurProvider with ChangeNotifier {
   bool get isAuth => _isAth;
   dynamic _userProfile;
   dynamic get userProfile => _userProfile;
+  late dynamic _proprieteList;
+  dynamic get proprieteList => _proprieteList;
+  late List proprietes;
 
   Future<void> resgisterUser(
       {required String name,
@@ -49,6 +52,20 @@ class UtilisateurProvider with ChangeNotifier {
           email: email,
           userToken: user.token,
         );
+        notifyListeners();
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> getPropriete() async {
+    try {
+      if (user != null) {
+        _proprieteList = await UserServices.getPropriete(
+          userToken: user.token,
+        );
+        proprietes = proprieteList["proprietes"];
         notifyListeners();
       }
     } catch (e) {

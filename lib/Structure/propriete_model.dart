@@ -5,51 +5,51 @@
 import 'dart:convert';
 
 class Propriete {
-    Propriete({
-        this.id,
-        this.superficie,
-        this.chambre,
-        this.douche,
-        this.cuisine,
-        this.garage,
-        this.prix,
-        this.loyer,
-        this.statu,
-        this.type,
-        this.description,
-        this.priorite,
-        this.logitude,
-        this.latitude,
-        this.quartierId,
-        this.userId,
-        this.createdAt,
-        this.updatedAt,
-    });
+  Propriete({
+    this.id,
+    this.superficie,
+    this.chambre,
+    this.douche,
+    this.cuisine,
+    this.garage,
+    this.prix,
+    this.loyer,
+    this.statu,
+    this.type,
+    this.description,
+    this.priorite,
+    this.logitude,
+    this.latitude,
+    this.quartierId,
+    this.userId,
+    this.createdAt,
+    this.updatedAt,
+  });
 
-   final int ? id;
-   final String ? superficie;
-final String ?  chambre;
-   final String ? douche;
-    final String ?  cuisine;
-    final String ?  garage;
-    final String ?  prix;
-    final String ?  loyer;
-    final String ?  statu;
-    final String ?  type;
-    final String ?  description;
-    final String ?  priorite;
-    final String ?  logitude;
-    final String ?  latitude;
-    final String ?  quartierId;
-    final String ?  userId;
-   final  DateTime? createdAt;
-     final  DateTime? updatedAt;
+  final int? id;
+  final String? superficie;
+  final String? chambre;
+  final String? douche;
+  final String? cuisine;
+  final String? garage;
+  final String? prix;
+  final String? loyer;
+  final String? statu;
+  final String? type;
+  final String? description;
+  final String? priorite;
+  final String? logitude;
+  final String? latitude;
+  final String? quartierId;
+  final String? userId;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
-    factory Propriete.fromJson(String str) => Propriete.fromMap(json.decode(str));
+  factory Propriete.fromJson(String str) => Propriete.fromMap(json.decode(str));
 
-    String toJson() => json.encode(toMap());
+  String toJson() => json.encode(toMap());
 
-    factory Propriete.fromMap(Map<String, dynamic> json) => Propriete(
+  factory Propriete.fromMap(Map<String, dynamic> json) => Propriete(
         id: json["id"],
         superficie: json["superficie"],
         chambre: json["chambre"],
@@ -68,9 +68,9 @@ final String ?  chambre;
         userId: json["user_id"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-    );
+      );
 
-    Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toMap() => {
         "id": id,
         "superficie": superficie,
         "chambre": chambre,
@@ -89,5 +89,5 @@ final String ?  chambre;
         "user_id": userId,
         "created_at": createdAt!.toIso8601String(),
         "updated_at": updatedAt!.toIso8601String(),
-    };
+      };
 }
