@@ -81,7 +81,7 @@ class _ConnexionState extends State<Connexion> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    height: 50,
+                   height: 50,
                     width: 100,
                     decoration: const BoxDecoration(
                         image: DecorationImage(
@@ -120,7 +120,7 @@ class _ConnexionState extends State<Connexion> {
                 height: 5,
               ),
               Container(
-                height: 40,
+                
                 width: 250,
                 decoration: BoxDecoration(
                     // borderRadius: BorderRadius.circular(30),
@@ -151,7 +151,7 @@ class _ConnexionState extends State<Connexion> {
               ),
 
               Container(
-                height: 40,
+            
                 width: 250,
                 decoration: BoxDecoration(
                     // borderRadius: BorderRadius.circular(30),

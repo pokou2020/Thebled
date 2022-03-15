@@ -2,11 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:thebled/Screen/profil.dart';
 
 import 'Screen/Acceuil.dart';
 import 'Screen/Connexion.dart';
 import 'Screen/First.dart';
 import 'Screen/Inscription.dart';
+import 'Screen/dashbord.dart';
 import 'Screen/propriete.dart';
 import 'Structure/Utilisateur_provider.dart';
 import 'Structure/propriete_provider.dart';
@@ -46,7 +48,10 @@ class MyApp extends StatelessWidget {
           "Inscription": (context) => const Inscription(),
           "accueil": (context) => Acceuil(),
            "propriete": (context) => Propriete(),
-
+            "First": (context) => First(),
+             Profil.routeName: (ctx) => Profil(),
+             MakeDashboardItems.routeName: (ctx) => const MakeDashboardItems(),
+                "dashbord": (context) => MakeDashboardItems(),
         },
       ),
     );

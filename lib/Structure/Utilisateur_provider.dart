@@ -1,4 +1,4 @@
-// ignore_for_file: empty_catches
+
 import 'package:flutter/material.dart';
 import 'package:thebled/Structure/Utilisateur_model.dart';
 import 'Utilisateur_service.dart';
@@ -40,6 +40,7 @@ class UtilisateurProvider with ChangeNotifier {
   Future<void> getProfil({
     name,
     email,
+     numero
   }) async {
     try {
       if (user != null) {
@@ -47,6 +48,7 @@ class UtilisateurProvider with ChangeNotifier {
         _userProfile = await UserServices.profilUser(
           name: name,
           email: email,
+          numero: numero,
           userToken: user.token,
         );
         notifyListeners();
@@ -55,4 +57,20 @@ class UtilisateurProvider with ChangeNotifier {
       print(e);
     }
   }
+
+  
+  Future<void> logOut() async {
+    await UserServices.clearUserinfo();
+    _isAth = false;
+    notifyListeners();
+  }
+
+  //   Future<void> logoutUser({message}) async {
+  //   try {
+  //     _user = await UserServices.logout(message);
+  //     notifyListeners();
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:thebled/Structure/Utilisateur_model.dart';
 
 class UserServices {
@@ -84,7 +85,9 @@ class UserServices {
   static Future profilUser({
     String? name,
     String? email,
-    String? userToken,
+     String?numero,
+    String? userToken, 
+   
   }) async {
     String url = 'http://bled.ci/api/profil';
 
@@ -107,4 +110,42 @@ class UserServices {
       throw error;
     }
   }
+
+
+    static Future<void> clearUserinfo() async {
+    try {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      pref.clear();
+      print("Clear all user info : logout");
+    } catch (e) {
+      print("Error to clear user information ");
+      print(e.toString());
+    }
+  }
+ 
+  // static Future<RegisterResponse> logout(
+  //   String message,
+  // ) async {
+  //   String url = "http://bled.ci/api/logout";
+
+  //   final response = await http.post(
+  //     (Uri.parse(url)),
+  //     body: {
+  //       "message": message,
+      
+  //     },
+  //   );
+  //   if (response.statusCode == 200) {
+  //     var _json = response.body.toString();
+  //     var _jsonDecode = json.decode(_json);
+  //     debugPrint(_json);
+  //     if (_jsonDecode["message"] != null) {
+  //       return RegisterResponse(message: _jsonDecode["message"]);
+  //     } else {
+  //       return RegisterResponse.fromJson(_jsonDecode);
+  //     }
+  //   } else {
+  //     throw Exception('Failed to load post ');
+  //   }
+  // }
 }

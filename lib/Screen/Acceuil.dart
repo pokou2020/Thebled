@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:thebled/Screen/profil.dart';
 import 'package:thebled/Structure/Utilisateur_model.dart';
 import 'package:thebled/Structure/Utilisateur_provider.dart';
+
+import 'dashbord.dart';
 
 class Acceuil extends StatefulWidget {
   Acceuil({Key? key}) : super(key: key);
@@ -48,9 +51,7 @@ class _AcceuilState extends State<Acceuil> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      CircleAvatar(
-                        maxRadius: 45,
-                      ),
+                     
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -82,12 +83,18 @@ class _AcceuilState extends State<Acceuil> {
                       SizedBox(
                         width: 20,
                       ),
-                      Container(
-                        child: Text(
-                          "Profils",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                      InkWell(
+                        onTap: () {
+                       Navigator.of(context).pushNamed(
+                                          Profil.routeName);
+                        },
+                        child: Container(
+                          child: Text(
+                            "Profils",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
@@ -165,42 +172,30 @@ class _AcceuilState extends State<Acceuil> {
                   const Divider(color: Colors.white),
                   Row(
                     children: [
-                      const Icon(Icons.accessibility_sharp,
+                      const Icon(Icons.home,
                           color: Colors.white),
                       SizedBox(
                         width: 25,
                       ),
-                      Container(
-                        child: Text(
-                          "Changer de mot de passe",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                      InkWell(
+                         onTap: () {
+                      Navigator.of(context)
+                              .pushReplacementNamed("dashbord");
+                        },
+                        child: Container(
+                          child: Text(
+                            "Dashboard",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    children: [
-                      Icon(Icons.highlight_off_sharp, color: Colors.white),
-                      SizedBox(
-                        width: 25,
-                      ),
-                      Container(
-                        child: Text(
-                          "Deconnexion",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                
+            
                 ],
               ),
             )),
