@@ -131,8 +131,7 @@ class _AcceuilState extends State<Acceuil> {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.of(context)
-                              .pushReplacementNamed("propriete");
+                          Navigator.of(context).pushNamed("propriete");
                         },
                         child: Container(
                           child: Text(
