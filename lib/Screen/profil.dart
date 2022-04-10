@@ -33,7 +33,7 @@ class _ProfilState extends State<Profil> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          color: Colors.green,
+          color: Colors.green[200],
           width: MediaQuery.of(context).size.width,
           height: 850,
           child: Padding(
@@ -106,8 +106,10 @@ class _ProfilState extends State<Profil> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      
                       Row(
                         children: [
+                       
                           IconButton(
                             icon: Icon(
                               Icons.person,
@@ -115,12 +117,8 @@ class _ProfilState extends State<Profil> {
                             ),
                             onPressed: () {},
                           ),
-                            Text(
-                                'Dashbord',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ),
+                           
+                          
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [

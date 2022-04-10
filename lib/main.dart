@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: UtilisateurProvider()),
-        ChangeNotifierProvider.value(value: ProprieteServices()),
+        //ChangeNotifierProvider.value(value: ProprieteServices()),
         ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -60,9 +60,9 @@ class MyApp extends StatelessWidget {
             AjouterTerrain.routeName: (ctx) => AjouterTerrain(),
              Profil.routeName: (ctx) => Profil(),
                AjouterProprieter.routeName: (ctx) => AjouterProprieter(),
-             MakeDashboardItems.routeName: (ctx) => const MakeDashboardItems(),
+              MakeDashboardItems.routeName: (ctx) => const MakeDashboardItems(),
                 "dashbord": (context) => MakeDashboardItems(),
-                Mot_de_passse.routeName:(ctx)=> Mot_de_passse(),
+              Mot_de_passse.routeName:(ctx)=> Mot_de_passse(),
 
                 
 
