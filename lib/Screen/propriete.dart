@@ -14,8 +14,6 @@ class Propriete extends StatefulWidget {
 }
 
 class _ProprieteState extends State<Propriete> {
-  var _isInit = true;
-  var _isLoading = false;
 
   UtilisateurProvider? utilisateurProvider;
   @override
@@ -23,6 +21,7 @@ class _ProprieteState extends State<Propriete> {
     // TODO: implement initState
     super.initState();
     utilisateurProvider = context.read<UtilisateurProvider>();
+    print(utilisateurProvider);
   }
 
   @override
@@ -55,14 +54,60 @@ class _ProprieteState extends State<Propriete> {
               return Consumer<UtilisateurProvider>(
                   builder: (ctx, proprietedata, child) => ListView.builder(
                         itemCount: proprietedata.proprietes.length,
-                        itemBuilder: (ctx, i) => ListTile(
-                          leading: CircleAvatar(
-                            child: Text("${i + 1}"),
+                        itemBuilder: (ctx, index) => Container(
+                          child: Column(
+                            children: [
+                                    Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                   color: Colors.red,
+                   height: MediaQuery.of(context).size.height / 3,
+                      width: MediaQuery.of(context).size.width / 1,
+                  child: Column(
+                    children: [
+                      Container(
+                        color: Colors.pink,
+                          height: MediaQuery.of(context).size.height / 4,
+                          width: MediaQuery.of(context).size.width / 1,
+                          child:Center(child: Text("${index + 1}")),
                           ),
-                          title: Text("chambre"),
-                          subtitle: Text("superficie"),
+
+                          Row(
+                            children: [
+                                Container(
+                                child: Text("Superficie",
+                                style:TextStyle(
+                                  fontSize:16,
+                                  fontWeight: FontWeight.bold
+                                )
+                                ),
+                              ),
+                              SizedBox(width:10),
+                              Container(
+                                child: Text("${proprietedata.proprieteList["proprietes"][index]["superficie"]}",
+                                   style:TextStyle(
+                                  fontSize:16,
+                                  fontWeight: FontWeight.bold
+                                )
+                                ),
+                              ),
+                            ],
+                          )
+                    ],
+                  ),
+                ),
+              ),
+                              // ListTile(
+                              //   leading: CircleAvatar(
+                              //     child: Text("${i + 1}"),
+                              //   ),
+                              //   title: Text("chambre"),
+                              //   subtitle: Text("superficie"),
+                              // ),
+                            ],
+                          ),
                         ),
-                      ));
+             ));
             }
           }
         },

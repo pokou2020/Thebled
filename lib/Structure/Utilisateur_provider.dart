@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:thebled/Structure/Utilisateur_model.dart';
+import 'package:thebled/Structure/proprieteModel.dart';
 import 'Utilisateur_service.dart';
 
 class UtilisateurProvider with ChangeNotifier {
@@ -40,11 +40,7 @@ class UtilisateurProvider with ChangeNotifier {
     }
   }
 
-  Future<void> getProfil({
-    name,
-    email,
-     numero
-  }) async {
+  Future<void> getProfil({name, email, numero}) async {
     try {
       if (user != null) {
         // print(user["token"].toString());
@@ -60,22 +56,13 @@ class UtilisateurProvider with ChangeNotifier {
       print(e);
     }
   }
-  
+
   Future<void> logOut() async {
     await UserServices.clearUserinfo();
     _isAth = false;
     notifyListeners();
   }
-
-  //   Future<void> logoutUser({message}) async {
-  //   try {
-  //     _user = await UserServices.logout(message);
-  //     notifyListeners();
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
-
+//Afficher les proprietes
   Future<void> getPropriete() async {
     try {
       if (user != null) {
@@ -83,6 +70,7 @@ class UtilisateurProvider with ChangeNotifier {
           userToken: user.token,
         );
         proprietes = proprieteList["proprietes"];
+        print("§§§§§§§§§§§§§§§§§§§§§§§§§§!object");
         notifyListeners();
       }
     } catch (e) {
@@ -90,4 +78,6 @@ class UtilisateurProvider with ChangeNotifier {
     }
   }
 
+  void addProprietr(ProprieteModel editPropriete) {}
+ 
 }

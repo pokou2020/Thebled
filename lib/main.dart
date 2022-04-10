@@ -3,11 +3,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:thebled/Screen/profil.dart';
+import 'package:thebled/Structure/propriete_service.dart';
 
 import 'Screen/Acceuil.dart';
+import 'Screen/AjoutDefavoris.dart';
+import 'Screen/AjouteDeterrain.dart';
+import 'Screen/Ajouter_Propriete.dart';
 import 'Screen/Connexion.dart';
 import 'Screen/First.dart';
 import 'Screen/Inscription.dart';
+import 'Screen/MesTerrain.dart';
+import 'Screen/MotDepasse.dart';
 import 'Screen/dashbord.dart';
 import 'Screen/propriete.dart';
 import 'Structure/Utilisateur_provider.dart';
@@ -26,7 +32,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(value: UtilisateurProvider()),
-        ChangeNotifierProvider.value(value: ProprieteProvider()),
+        ChangeNotifierProvider.value(value: ProprieteServices()),
         ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -49,9 +55,17 @@ class MyApp extends StatelessWidget {
           "accueil": (context) => Acceuil(),
            "propriete": (context) => Propriete(),
             "First": (context) => First(),
+            Ajout_favoris.routeName: (ctx) => Ajout_favoris(),
+            Mes_terrains.routeName: (ctx) => Mes_terrains(),
+            AjouterTerrain.routeName: (ctx) => AjouterTerrain(),
              Profil.routeName: (ctx) => Profil(),
+               AjouterProprieter.routeName: (ctx) => AjouterProprieter(),
              MakeDashboardItems.routeName: (ctx) => const MakeDashboardItems(),
                 "dashbord": (context) => MakeDashboardItems(),
+                Mot_de_passse.routeName:(ctx)=> Mot_de_passse(),
+
+                
+
         },
       ),
     );

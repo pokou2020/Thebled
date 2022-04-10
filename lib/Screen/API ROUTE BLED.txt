@@ -1,0 +1,33 @@
++-----------+----------------------------------+------------------------------------------------------------------------+-----------------------------------------------------+
+| Method    | URI                              | Données formulaire                                                                                                           |
++-----------+----------------------------------+------------------------------------------------------------------------+-----------------------------------------------------+
+| POST      | api/login                        | email | password                                                                                                             |
+| POST      | api/logout                       |                                                                                                                              |
+|           |                                  |                                                                                                                              |
+| GET|HEAD  | api/profil                       |                                                                                                                              |
+|           |                                  |                                                                                                                              |
+| GET|HEAD  | api/proprietes                   |                                                                                                                              |
+|           |                                  |                                                                                                                              |
+| POST      | api/proprietes (enregistrement)  | status='vente','location' | loyer | prix, type='maison','bureau','magasin','immeuble','terrain','villa' | superficie         |
+|           |                                  | cuisine | chambre | douche | garage | ville | commune | quartier | images | lon | lat | description                          |
+|           |                                  |                                                                                                                              |
+| PUT|PATCH | api/proprietes/{id} (Modif)      | Même données que pour l'enregistrement des propriétés                                                                        |
+|           |                                  |                                                                                                                              |
+| DELETE    | api/proprietes/{id} (Suppression)|                                                                                                                              |
+|           |                                  |                                                                                                                              |
+| GET|HEAD  | api/proprietes/{id} (Afficher)   |                                                                                                                              |
+|           |                                  |                                                                                                                              |
+| POST      | api/register                     | name | email | password | password_confirmation | numero | matricule | statu='agence','agent','user'                         |
+| GET|HEAD  | api/terrains (Afficher)          |                                                                                                                              |
+|           |                                  |                                                                                                                              |
+| POST      | api/terrains (enregistrement)    | prix | superficie | ville | commune | quartier | images | lon | lat | description                                            |
+|           |                                  |                                                                                                                              |
+| PUT|PATCH | api/terrains/{id}     (Modif)    | Même données que pour l'enregistrement des terrains                                                                          |
+|           |                                  |                                                                                                                              |
+| DELETE    | api/terrains/{id} (Suppression)  |                                                                                                                              |
+|           |                                  |                                                                                                                              |
+| GET|HEAD  | api/terrains/{id}   (Afficher)   |                                                                                                                              |
+|           |                                  |                                                                                                                              |
++-----------+----------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+
+ROOT BASE : http://bled.ci/

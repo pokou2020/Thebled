@@ -123,31 +123,7 @@ class UserServices {
     }
   }
  
-  // static Future<RegisterResponse> logout(
-  //   String message,
-  // ) async {
-  //   String url = "http://bled.ci/api/logout";
-
-  //   final response = await http.post(
-  //     (Uri.parse(url)),
-  //     body: {
-  //       "message": message,
-      
-  //     },
-  //   );
-  //   if (response.statusCode == 200) {
-  //     var _json = response.body.toString();
-  //     var _jsonDecode = json.decode(_json);
-  //     debugPrint(_json);
-  //     if (_jsonDecode["message"] != null) {
-  //       return RegisterResponse(message: _jsonDecode["message"]);
-  //     } else {
-  //       return RegisterResponse.fromJson(_jsonDecode);
-  //     }
-  //   } else {
-  //     throw Exception('Failed to load post ');
-  //   }
-  // }
+ 
   static Future getPropriete({String? userToken}) async {
     String url = 'http://bled.ci/api/proprietes';
 
@@ -169,4 +145,6 @@ class UserServices {
       throw error;
     }
   }
+
+  
 }

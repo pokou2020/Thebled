@@ -2,44 +2,58 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:thebled/Structure/Utilisateur_model.dart';
+import 'package:thebled/Structure/proprieteModel.dart';
 
-class ProprieteServices {
-  // Afficher les proprieterUser
-
-  static Future proprieterUser(
-    int id,
-    String superficie,
-    String chambre,
-    String douche,
-    String cuisine,
-    String garage,
-    String prix,
-    String loyer,
-    String statu,
-    String type,
-    String description,
-    String priorite,
-    String logitude,
-    String latitude,
-    String quartierId,
-    String userId,
-    DateTime createdAt,
-    DateTime updatedAt,
-  ) async {
-    String url = 'http://bled.ci/api/proprietes';
-
-    try {
-      final response = await http.get(Uri.parse(url));
-
-      if (response.statusCode == 200) {
-        var _json = response.body.toString();
-        var _jsonDecode = json.decode(_json);
-        return _jsonDecode;
-      }
-
-      print("============== Data fetched");
+class ProprieteServices with ChangeNotifier {
+  // Ajouter une proprieter
+List<ProprieteModel> _items = [];
+  List<ProprieteModel> get items {
+   
+    return [..._items];
+  }
+  Future<void> createPropriete(ProprieteModel proprieteModel) async {
+    const url = "http://bled.ci/api/proprietes";
+    try{
+    final response = await http.post((Uri.parse(url)),
+        body: json.encode(
+          {
+            "status": proprieteModel.status,
+            "loyer": proprieteModel.loyer,
+            "superficie": proprieteModel.superficie,
+            "cuisine": proprieteModel.cuisine,
+            "chambre": proprieteModel.chambre,
+            "douche": proprieteModel.douche,
+            "ville": proprieteModel.ville,
+            "commune": proprieteModel.commune,
+            "quartier": proprieteModel.quartier,
+            "images": proprieteModel.images,
+            "lon": proprieteModel.lon,
+            "lat": proprieteModel.lat,
+            "description": proprieteModel.description,
+          },
+        ));
+    final newPropriete = ProprieteModel(
+      status: proprieteModel.status,
+      loyer: proprieteModel.loyer,
+      superficie: proprieteModel.superficie,
+      cuisine: proprieteModel.cuisine,
+      chambre: proprieteModel.chambre,
+      douche: proprieteModel.douche,
+      garage: proprieteModel.garage,
+      ville: proprieteModel.ville,
+      commune: proprieteModel.commune,
+      quartier: proprieteModel.quartier,
+      images: proprieteModel.images,
+      lon: proprieteModel.lon,
+      lat: proprieteModel.lat,
+      description: proprieteModel.description,
+      id: json.decode(response.body)['name'],
+    );
+      _items.add(newPropriete);
+         notifyListeners();
     } catch (error) {
+      print(error);
       throw error;
     }
-  }
+}
 }

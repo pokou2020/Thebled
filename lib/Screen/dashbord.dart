@@ -106,7 +106,9 @@ class _MakeDashboardItemsState extends State<MakeDashboardItems> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     appBar: AppBar(title:     Text(
+     appBar: AppBar(
+        backgroundColor: Colors.green[200],
+       title:     const Text(
                       "Bled Dashboard",
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
